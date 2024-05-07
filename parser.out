@@ -1,0 +1,1095 @@
+Grammar:
+
+Rule 0     S' -> program
+Rule 1     program -> statements
+Rule 2     statements -> statement ;
+Rule 3     statements -> statement ; statements
+Rule 4     statement -> WHILE ( expr ) { statements }
+Rule 5     statement -> IF ( expr ) { statements }
+Rule 6     statement -> IF ( expr ) { statements } ELSE { statements }
+Rule 7     statement -> NAME = expr
+Rule 8     statement -> PRINT ( expr )
+Rule 9     expr -> BOOLEAN
+Rule 10    expr -> NAME
+Rule 11    expr -> expr
+Rule 12    expr -> NUMBER
+Rule 13    expr -> expr NOTEQUALS expr  [precedence=left, level=1]
+Rule 14    expr -> expr EQUALS expr  [precedence=left, level=1]
+Rule 15    expr -> expr GREATER expr
+Rule 16    expr -> expr LESS expr
+Rule 17    expr -> expr / expr  [precedence=left, level=3]
+Rule 18    expr -> expr * expr  [precedence=left, level=3]
+Rule 19    expr -> expr - expr  [precedence=left, level=2]
+Rule 20    expr -> expr + expr  [precedence=left, level=2]
+Rule 21    expr -> STRING
+
+Terminals, with rules where they appear:
+
+(                    : 4 5 6 8
+)                    : 4 5 6 8
+*                    : 18
++                    : 20
+-                    : 19
+/                    : 17
+;                    : 2 3
+=                    : 7
+BOOLEAN              : 9
+ELSE                 : 6
+EQUALS               : 14
+GREATER              : 15
+IF                   : 5 6
+LESS                 : 16
+NAME                 : 7 10
+NOTEQUALS            : 13
+NUMBER               : 12
+PRINT                : 8
+STRING               : 21
+WHILE                : 4
+error                : 
+{                    : 4 5 6 6
+}                    : 4 5 6 6
+
+Nonterminals, with rules where they appear:
+
+expr                 : 4 5 6 7 8 11 13 13 14 14 15 15 16 16 17 17 18 18 19 19 20 20
+program              : 0
+statement            : 2 3
+statements           : 1 3 4 5 6 6
+
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . statements
+    (2) statements -> . statement ;
+    (3) statements -> . statement ; statements
+    (4) statement -> . WHILE ( expr ) { statements }
+    (5) statement -> . IF ( expr ) { statements }
+    (6) statement -> . IF ( expr ) { statements } ELSE { statements }
+    (7) statement -> . NAME = expr
+    (8) statement -> . PRINT ( expr )
+    WHILE           shift and go to state 4
+    IF              shift and go to state 5
+    NAME            shift and go to state 6
+    PRINT           shift and go to state 7
+
+    program                        shift and go to state 1
+    statements                     shift and go to state 2
+    statement                      shift and go to state 3
+
+state 1
+
+    (0) S' -> program .
+
+
+state 2
+
+    (1) program -> statements .
+    $end            reduce using rule 1 (program -> statements .)
+
+
+state 3
+
+    (2) statements -> statement . ;
+    (3) statements -> statement . ; statements
+    ;               shift and go to state 8
+
+
+state 4
+
+    (4) statement -> WHILE . ( expr ) { statements }
+    (               shift and go to state 9
+
+
+state 5
+
+    (5) statement -> IF . ( expr ) { statements }
+    (6) statement -> IF . ( expr ) { statements } ELSE { statements }
+    (               shift and go to state 10
+
+
+state 6
+
+    (7) statement -> NAME . = expr
+    =               shift and go to state 11
+
+
+state 7
+
+    (8) statement -> PRINT . ( expr )
+    (               shift and go to state 12
+
+
+state 8
+
+    (2) statements -> statement ; .
+    (3) statements -> statement ; . statements
+    (2) statements -> . statement ;
+    (3) statements -> . statement ; statements
+    (4) statement -> . WHILE ( expr ) { statements }
+    (5) statement -> . IF ( expr ) { statements }
+    (6) statement -> . IF ( expr ) { statements } ELSE { statements }
+    (7) statement -> . NAME = expr
+    (8) statement -> . PRINT ( expr )
+    $end            reduce using rule 2 (statements -> statement ; .)
+    }               reduce using rule 2 (statements -> statement ; .)
+    WHILE           shift and go to state 4
+    IF              shift and go to state 5
+    NAME            shift and go to state 6
+    PRINT           shift and go to state 7
+
+    statement                      shift and go to state 3
+    statements                     shift and go to state 13
+
+state 9
+
+    (4) statement -> WHILE ( . expr ) { statements }
+    (9) expr -> . BOOLEAN
+    (10) expr -> . NAME
+    (11) expr -> . expr
+    (12) expr -> . NUMBER
+    (13) expr -> . expr NOTEQUALS expr
+    (14) expr -> . expr EQUALS expr
+    (15) expr -> . expr GREATER expr
+    (16) expr -> . expr LESS expr
+    (17) expr -> . expr / expr
+    (18) expr -> . expr * expr
+    (19) expr -> . expr - expr
+    (20) expr -> . expr + expr
+    (21) expr -> . STRING
+    BOOLEAN         shift and go to state 15
+    NAME            shift and go to state 16
+    NUMBER          shift and go to state 17
+    STRING          shift and go to state 18
+
+    expr                           shift and go to state 14
+
+state 10
+
+    (5) statement -> IF ( . expr ) { statements }
+    (6) statement -> IF ( . expr ) { statements } ELSE { statements }
+    (9) expr -> . BOOLEAN
+    (10) expr -> . NAME
+    (11) expr -> . expr
+    (12) expr -> . NUMBER
+    (13) expr -> . expr NOTEQUALS expr
+    (14) expr -> . expr EQUALS expr
+    (15) expr -> . expr GREATER expr
+    (16) expr -> . expr LESS expr
+    (17) expr -> . expr / expr
+    (18) expr -> . expr * expr
+    (19) expr -> . expr - expr
+    (20) expr -> . expr + expr
+    (21) expr -> . STRING
+    BOOLEAN         shift and go to state 15
+    NAME            shift and go to state 16
+    NUMBER          shift and go to state 17
+    STRING          shift and go to state 18
+
+    expr                           shift and go to state 19
+
+state 11
+
+    (7) statement -> NAME = . expr
+    (9) expr -> . BOOLEAN
+    (10) expr -> . NAME
+    (11) expr -> . expr
+    (12) expr -> . NUMBER
+    (13) expr -> . expr NOTEQUALS expr
+    (14) expr -> . expr EQUALS expr
+    (15) expr -> . expr GREATER expr
+    (16) expr -> . expr LESS expr
+    (17) expr -> . expr / expr
+    (18) expr -> . expr * expr
+    (19) expr -> . expr - expr
+    (20) expr -> . expr + expr
+    (21) expr -> . STRING
+    BOOLEAN         shift and go to state 15
+    NAME            shift and go to state 16
+    NUMBER          shift and go to state 17
+    STRING          shift and go to state 18
+
+    expr                           shift and go to state 20
+
+state 12
+
+    (8) statement -> PRINT ( . expr )
+    (9) expr -> . BOOLEAN
+    (10) expr -> . NAME
+    (11) expr -> . expr
+    (12) expr -> . NUMBER
+    (13) expr -> . expr NOTEQUALS expr
+    (14) expr -> . expr EQUALS expr
+    (15) expr -> . expr GREATER expr
+    (16) expr -> . expr LESS expr
+    (17) expr -> . expr / expr
+    (18) expr -> . expr * expr
+    (19) expr -> . expr - expr
+    (20) expr -> . expr + expr
+    (21) expr -> . STRING
+    BOOLEAN         shift and go to state 15
+    NAME            shift and go to state 16
+    NUMBER          shift and go to state 17
+    STRING          shift and go to state 18
+
+    expr                           shift and go to state 21
+
+state 13
+
+    (3) statements -> statement ; statements .
+    $end            reduce using rule 3 (statements -> statement ; statements .)
+    }               reduce using rule 3 (statements -> statement ; statements .)
+
+
+state 14
+
+    (4) statement -> WHILE ( expr . ) { statements }
+    (11) expr -> expr .
+    (13) expr -> expr . NOTEQUALS expr
+    (14) expr -> expr . EQUALS expr
+    (15) expr -> expr . GREATER expr
+    (16) expr -> expr . LESS expr
+    (17) expr -> expr . / expr
+    (18) expr -> expr . * expr
+    (19) expr -> expr . - expr
+    (20) expr -> expr . + expr
+  ! shift/reduce conflict for ) resolved as shift
+  ! shift/reduce conflict for NOTEQUALS resolved as shift
+  ! shift/reduce conflict for EQUALS resolved as shift
+  ! shift/reduce conflict for GREATER resolved as shift
+  ! shift/reduce conflict for LESS resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for + resolved as shift
+    )               shift and go to state 22
+    NOTEQUALS       shift and go to state 23
+    EQUALS          shift and go to state 24
+    GREATER         shift and go to state 25
+    LESS            shift and go to state 26
+    /               shift and go to state 27
+    *               shift and go to state 28
+    -               shift and go to state 29
+    +               shift and go to state 30
+
+
+state 15
+
+    (9) expr -> BOOLEAN .
+    )               reduce using rule 9 (expr -> BOOLEAN .)
+    NOTEQUALS       reduce using rule 9 (expr -> BOOLEAN .)
+    EQUALS          reduce using rule 9 (expr -> BOOLEAN .)
+    GREATER         reduce using rule 9 (expr -> BOOLEAN .)
+    LESS            reduce using rule 9 (expr -> BOOLEAN .)
+    /               reduce using rule 9 (expr -> BOOLEAN .)
+    *               reduce using rule 9 (expr -> BOOLEAN .)
+    -               reduce using rule 9 (expr -> BOOLEAN .)
+    +               reduce using rule 9 (expr -> BOOLEAN .)
+    ;               reduce using rule 9 (expr -> BOOLEAN .)
+
+
+state 16
+
+    (10) expr -> NAME .
+    )               reduce using rule 10 (expr -> NAME .)
+    NOTEQUALS       reduce using rule 10 (expr -> NAME .)
+    EQUALS          reduce using rule 10 (expr -> NAME .)
+    GREATER         reduce using rule 10 (expr -> NAME .)
+    LESS            reduce using rule 10 (expr -> NAME .)
+    /               reduce using rule 10 (expr -> NAME .)
+    *               reduce using rule 10 (expr -> NAME .)
+    -               reduce using rule 10 (expr -> NAME .)
+    +               reduce using rule 10 (expr -> NAME .)
+    ;               reduce using rule 10 (expr -> NAME .)
+
+
+state 17
+
+    (12) expr -> NUMBER .
+    )               reduce using rule 12 (expr -> NUMBER .)
+    NOTEQUALS       reduce using rule 12 (expr -> NUMBER .)
+    EQUALS          reduce using rule 12 (expr -> NUMBER .)
+    GREATER         reduce using rule 12 (expr -> NUMBER .)
+    LESS            reduce using rule 12 (expr -> NUMBER .)
+    /               reduce using rule 12 (expr -> NUMBER .)
+    *               reduce using rule 12 (expr -> NUMBER .)
+    -               reduce using rule 12 (expr -> NUMBER .)
+    +               reduce using rule 12 (expr -> NUMBER .)
+    ;               reduce using rule 12 (expr -> NUMBER .)
+
+
+state 18
+
+    (21) expr -> STRING .
+    )               reduce using rule 21 (expr -> STRING .)
+    NOTEQUALS       reduce using rule 21 (expr -> STRING .)
+    EQUALS          reduce using rule 21 (expr -> STRING .)
+    GREATER         reduce using rule 21 (expr -> STRING .)
+    LESS            reduce using rule 21 (expr -> STRING .)
+    /               reduce using rule 21 (expr -> STRING .)
+    *               reduce using rule 21 (expr -> STRING .)
+    -               reduce using rule 21 (expr -> STRING .)
+    +               reduce using rule 21 (expr -> STRING .)
+    ;               reduce using rule 21 (expr -> STRING .)
+
+
+state 19
+
+    (5) statement -> IF ( expr . ) { statements }
+    (6) statement -> IF ( expr . ) { statements } ELSE { statements }
+    (11) expr -> expr .
+    (13) expr -> expr . NOTEQUALS expr
+    (14) expr -> expr . EQUALS expr
+    (15) expr -> expr . GREATER expr
+    (16) expr -> expr . LESS expr
+    (17) expr -> expr . / expr
+    (18) expr -> expr . * expr
+    (19) expr -> expr . - expr
+    (20) expr -> expr . + expr
+  ! shift/reduce conflict for ) resolved as shift
+  ! shift/reduce conflict for NOTEQUALS resolved as shift
+  ! shift/reduce conflict for EQUALS resolved as shift
+  ! shift/reduce conflict for GREATER resolved as shift
+  ! shift/reduce conflict for LESS resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for + resolved as shift
+    )               shift and go to state 31
+    NOTEQUALS       shift and go to state 23
+    EQUALS          shift and go to state 24
+    GREATER         shift and go to state 25
+    LESS            shift and go to state 26
+    /               shift and go to state 27
+    *               shift and go to state 28
+    -               shift and go to state 29
+    +               shift and go to state 30
+
+
+state 20
+
+    (7) statement -> NAME = expr .
+    (11) expr -> expr .
+    (13) expr -> expr . NOTEQUALS expr
+    (14) expr -> expr . EQUALS expr
+    (15) expr -> expr . GREATER expr
+    (16) expr -> expr . LESS expr
+    (17) expr -> expr . / expr
+    (18) expr -> expr . * expr
+    (19) expr -> expr . - expr
+    (20) expr -> expr . + expr
+  ! reduce/reduce conflict for ; resolved using rule 7 (statement -> NAME = expr .)
+  ! shift/reduce conflict for NOTEQUALS resolved as shift
+  ! shift/reduce conflict for EQUALS resolved as shift
+  ! shift/reduce conflict for GREATER resolved as shift
+  ! shift/reduce conflict for LESS resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for + resolved as shift
+    ;               reduce using rule 7 (statement -> NAME = expr .)
+    NOTEQUALS       shift and go to state 23
+    EQUALS          shift and go to state 24
+    GREATER         shift and go to state 25
+    LESS            shift and go to state 26
+    /               shift and go to state 27
+    *               shift and go to state 28
+    -               shift and go to state 29
+    +               shift and go to state 30
+
+
+state 21
+
+    (8) statement -> PRINT ( expr . )
+    (11) expr -> expr .
+    (13) expr -> expr . NOTEQUALS expr
+    (14) expr -> expr . EQUALS expr
+    (15) expr -> expr . GREATER expr
+    (16) expr -> expr . LESS expr
+    (17) expr -> expr . / expr
+    (18) expr -> expr . * expr
+    (19) expr -> expr . - expr
+    (20) expr -> expr . + expr
+  ! shift/reduce conflict for ) resolved as shift
+  ! shift/reduce conflict for NOTEQUALS resolved as shift
+  ! shift/reduce conflict for EQUALS resolved as shift
+  ! shift/reduce conflict for GREATER resolved as shift
+  ! shift/reduce conflict for LESS resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for + resolved as shift
+    )               shift and go to state 32
+    NOTEQUALS       shift and go to state 23
+    EQUALS          shift and go to state 24
+    GREATER         shift and go to state 25
+    LESS            shift and go to state 26
+    /               shift and go to state 27
+    *               shift and go to state 28
+    -               shift and go to state 29
+    +               shift and go to state 30
+
+
+state 22
+
+    (4) statement -> WHILE ( expr ) . { statements }
+    {               shift and go to state 33
+
+
+state 23
+
+    (13) expr -> expr NOTEQUALS . expr
+    (9) expr -> . BOOLEAN
+    (10) expr -> . NAME
+    (11) expr -> . expr
+    (12) expr -> . NUMBER
+    (13) expr -> . expr NOTEQUALS expr
+    (14) expr -> . expr EQUALS expr
+    (15) expr -> . expr GREATER expr
+    (16) expr -> . expr LESS expr
+    (17) expr -> . expr / expr
+    (18) expr -> . expr * expr
+    (19) expr -> . expr - expr
+    (20) expr -> . expr + expr
+    (21) expr -> . STRING
+    BOOLEAN         shift and go to state 15
+    NAME            shift and go to state 16
+    NUMBER          shift and go to state 17
+    STRING          shift and go to state 18
+
+    expr                           shift and go to state 34
+
+state 24
+
+    (14) expr -> expr EQUALS . expr
+    (9) expr -> . BOOLEAN
+    (10) expr -> . NAME
+    (11) expr -> . expr
+    (12) expr -> . NUMBER
+    (13) expr -> . expr NOTEQUALS expr
+    (14) expr -> . expr EQUALS expr
+    (15) expr -> . expr GREATER expr
+    (16) expr -> . expr LESS expr
+    (17) expr -> . expr / expr
+    (18) expr -> . expr * expr
+    (19) expr -> . expr - expr
+    (20) expr -> . expr + expr
+    (21) expr -> . STRING
+    BOOLEAN         shift and go to state 15
+    NAME            shift and go to state 16
+    NUMBER          shift and go to state 17
+    STRING          shift and go to state 18
+
+    expr                           shift and go to state 35
+
+state 25
+
+    (15) expr -> expr GREATER . expr
+    (9) expr -> . BOOLEAN
+    (10) expr -> . NAME
+    (11) expr -> . expr
+    (12) expr -> . NUMBER
+    (13) expr -> . expr NOTEQUALS expr
+    (14) expr -> . expr EQUALS expr
+    (15) expr -> . expr GREATER expr
+    (16) expr -> . expr LESS expr
+    (17) expr -> . expr / expr
+    (18) expr -> . expr * expr
+    (19) expr -> . expr - expr
+    (20) expr -> . expr + expr
+    (21) expr -> . STRING
+    BOOLEAN         shift and go to state 15
+    NAME            shift and go to state 16
+    NUMBER          shift and go to state 17
+    STRING          shift and go to state 18
+
+    expr                           shift and go to state 36
+
+state 26
+
+    (16) expr -> expr LESS . expr
+    (9) expr -> . BOOLEAN
+    (10) expr -> . NAME
+    (11) expr -> . expr
+    (12) expr -> . NUMBER
+    (13) expr -> . expr NOTEQUALS expr
+    (14) expr -> . expr EQUALS expr
+    (15) expr -> . expr GREATER expr
+    (16) expr -> . expr LESS expr
+    (17) expr -> . expr / expr
+    (18) expr -> . expr * expr
+    (19) expr -> . expr - expr
+    (20) expr -> . expr + expr
+    (21) expr -> . STRING
+    BOOLEAN         shift and go to state 15
+    NAME            shift and go to state 16
+    NUMBER          shift and go to state 17
+    STRING          shift and go to state 18
+
+    expr                           shift and go to state 37
+
+state 27
+
+    (17) expr -> expr / . expr
+    (9) expr -> . BOOLEAN
+    (10) expr -> . NAME
+    (11) expr -> . expr
+    (12) expr -> . NUMBER
+    (13) expr -> . expr NOTEQUALS expr
+    (14) expr -> . expr EQUALS expr
+    (15) expr -> . expr GREATER expr
+    (16) expr -> . expr LESS expr
+    (17) expr -> . expr / expr
+    (18) expr -> . expr * expr
+    (19) expr -> . expr - expr
+    (20) expr -> . expr + expr
+    (21) expr -> . STRING
+    BOOLEAN         shift and go to state 15
+    NAME            shift and go to state 16
+    NUMBER          shift and go to state 17
+    STRING          shift and go to state 18
+
+    expr                           shift and go to state 38
+
+state 28
+
+    (18) expr -> expr * . expr
+    (9) expr -> . BOOLEAN
+    (10) expr -> . NAME
+    (11) expr -> . expr
+    (12) expr -> . NUMBER
+    (13) expr -> . expr NOTEQUALS expr
+    (14) expr -> . expr EQUALS expr
+    (15) expr -> . expr GREATER expr
+    (16) expr -> . expr LESS expr
+    (17) expr -> . expr / expr
+    (18) expr -> . expr * expr
+    (19) expr -> . expr - expr
+    (20) expr -> . expr + expr
+    (21) expr -> . STRING
+    BOOLEAN         shift and go to state 15
+    NAME            shift and go to state 16
+    NUMBER          shift and go to state 17
+    STRING          shift and go to state 18
+
+    expr                           shift and go to state 39
+
+state 29
+
+    (19) expr -> expr - . expr
+    (9) expr -> . BOOLEAN
+    (10) expr -> . NAME
+    (11) expr -> . expr
+    (12) expr -> . NUMBER
+    (13) expr -> . expr NOTEQUALS expr
+    (14) expr -> . expr EQUALS expr
+    (15) expr -> . expr GREATER expr
+    (16) expr -> . expr LESS expr
+    (17) expr -> . expr / expr
+    (18) expr -> . expr * expr
+    (19) expr -> . expr - expr
+    (20) expr -> . expr + expr
+    (21) expr -> . STRING
+    BOOLEAN         shift and go to state 15
+    NAME            shift and go to state 16
+    NUMBER          shift and go to state 17
+    STRING          shift and go to state 18
+
+    expr                           shift and go to state 40
+
+state 30
+
+    (20) expr -> expr + . expr
+    (9) expr -> . BOOLEAN
+    (10) expr -> . NAME
+    (11) expr -> . expr
+    (12) expr -> . NUMBER
+    (13) expr -> . expr NOTEQUALS expr
+    (14) expr -> . expr EQUALS expr
+    (15) expr -> . expr GREATER expr
+    (16) expr -> . expr LESS expr
+    (17) expr -> . expr / expr
+    (18) expr -> . expr * expr
+    (19) expr -> . expr - expr
+    (20) expr -> . expr + expr
+    (21) expr -> . STRING
+    BOOLEAN         shift and go to state 15
+    NAME            shift and go to state 16
+    NUMBER          shift and go to state 17
+    STRING          shift and go to state 18
+
+    expr                           shift and go to state 41
+
+state 31
+
+    (5) statement -> IF ( expr ) . { statements }
+    (6) statement -> IF ( expr ) . { statements } ELSE { statements }
+    {               shift and go to state 42
+
+
+state 32
+
+    (8) statement -> PRINT ( expr ) .
+    ;               reduce using rule 8 (statement -> PRINT ( expr ) .)
+
+
+state 33
+
+    (4) statement -> WHILE ( expr ) { . statements }
+    (2) statements -> . statement ;
+    (3) statements -> . statement ; statements
+    (4) statement -> . WHILE ( expr ) { statements }
+    (5) statement -> . IF ( expr ) { statements }
+    (6) statement -> . IF ( expr ) { statements } ELSE { statements }
+    (7) statement -> . NAME = expr
+    (8) statement -> . PRINT ( expr )
+    WHILE           shift and go to state 4
+    IF              shift and go to state 5
+    NAME            shift and go to state 6
+    PRINT           shift and go to state 7
+
+    statements                     shift and go to state 43
+    statement                      shift and go to state 3
+
+state 34
+
+    (13) expr -> expr NOTEQUALS expr .
+    (11) expr -> expr .
+    (13) expr -> expr . NOTEQUALS expr
+    (14) expr -> expr . EQUALS expr
+    (15) expr -> expr . GREATER expr
+    (16) expr -> expr . LESS expr
+    (17) expr -> expr . / expr
+    (18) expr -> expr . * expr
+    (19) expr -> expr . - expr
+    (20) expr -> expr . + expr
+  ! reduce/reduce conflict for NOTEQUALS resolved using rule 13 (expr -> expr NOTEQUALS expr .)
+  ! reduce/reduce conflict for EQUALS resolved using rule 13 (expr -> expr NOTEQUALS expr .)
+  ! reduce/reduce conflict for GREATER resolved using rule 13 (expr -> expr NOTEQUALS expr .)
+  ! reduce/reduce conflict for LESS resolved using rule 13 (expr -> expr NOTEQUALS expr .)
+  ! reduce/reduce conflict for / resolved using rule 13 (expr -> expr NOTEQUALS expr .)
+  ! reduce/reduce conflict for * resolved using rule 13 (expr -> expr NOTEQUALS expr .)
+  ! reduce/reduce conflict for - resolved using rule 13 (expr -> expr NOTEQUALS expr .)
+  ! reduce/reduce conflict for + resolved using rule 13 (expr -> expr NOTEQUALS expr .)
+  ! reduce/reduce conflict for ) resolved using rule 13 (expr -> expr NOTEQUALS expr .)
+  ! reduce/reduce conflict for ; resolved using rule 13 (expr -> expr NOTEQUALS expr .)
+    )               reduce using rule 13 (expr -> expr NOTEQUALS expr .)
+    NOTEQUALS       reduce using rule 13 (expr -> expr NOTEQUALS expr .)
+    EQUALS          reduce using rule 13 (expr -> expr NOTEQUALS expr .)
+    GREATER         reduce using rule 13 (expr -> expr NOTEQUALS expr .)
+    LESS            reduce using rule 13 (expr -> expr NOTEQUALS expr .)
+    ;               reduce using rule 13 (expr -> expr NOTEQUALS expr .)
+    /               shift and go to state 27
+    *               shift and go to state 28
+    -               shift and go to state 29
+    +               shift and go to state 30
+
+
+state 35
+
+    (14) expr -> expr EQUALS expr .
+    (11) expr -> expr .
+    (13) expr -> expr . NOTEQUALS expr
+    (14) expr -> expr . EQUALS expr
+    (15) expr -> expr . GREATER expr
+    (16) expr -> expr . LESS expr
+    (17) expr -> expr . / expr
+    (18) expr -> expr . * expr
+    (19) expr -> expr . - expr
+    (20) expr -> expr . + expr
+  ! reduce/reduce conflict for NOTEQUALS resolved using rule 14 (expr -> expr EQUALS expr .)
+  ! reduce/reduce conflict for EQUALS resolved using rule 14 (expr -> expr EQUALS expr .)
+  ! reduce/reduce conflict for GREATER resolved using rule 14 (expr -> expr EQUALS expr .)
+  ! reduce/reduce conflict for LESS resolved using rule 14 (expr -> expr EQUALS expr .)
+  ! reduce/reduce conflict for / resolved using rule 14 (expr -> expr EQUALS expr .)
+  ! reduce/reduce conflict for * resolved using rule 14 (expr -> expr EQUALS expr .)
+  ! reduce/reduce conflict for - resolved using rule 14 (expr -> expr EQUALS expr .)
+  ! reduce/reduce conflict for + resolved using rule 14 (expr -> expr EQUALS expr .)
+  ! reduce/reduce conflict for ) resolved using rule 14 (expr -> expr EQUALS expr .)
+  ! reduce/reduce conflict for ; resolved using rule 14 (expr -> expr EQUALS expr .)
+    )               reduce using rule 14 (expr -> expr EQUALS expr .)
+    NOTEQUALS       reduce using rule 14 (expr -> expr EQUALS expr .)
+    EQUALS          reduce using rule 14 (expr -> expr EQUALS expr .)
+    GREATER         reduce using rule 14 (expr -> expr EQUALS expr .)
+    LESS            reduce using rule 14 (expr -> expr EQUALS expr .)
+    ;               reduce using rule 14 (expr -> expr EQUALS expr .)
+    /               shift and go to state 27
+    *               shift and go to state 28
+    -               shift and go to state 29
+    +               shift and go to state 30
+
+
+state 36
+
+    (15) expr -> expr GREATER expr .
+    (11) expr -> expr .
+    (13) expr -> expr . NOTEQUALS expr
+    (14) expr -> expr . EQUALS expr
+    (15) expr -> expr . GREATER expr
+    (16) expr -> expr . LESS expr
+    (17) expr -> expr . / expr
+    (18) expr -> expr . * expr
+    (19) expr -> expr . - expr
+    (20) expr -> expr . + expr
+  ! reduce/reduce conflict for NOTEQUALS resolved using rule 15 (expr -> expr GREATER expr .)
+  ! reduce/reduce conflict for EQUALS resolved using rule 15 (expr -> expr GREATER expr .)
+  ! reduce/reduce conflict for GREATER resolved using rule 15 (expr -> expr GREATER expr .)
+  ! reduce/reduce conflict for LESS resolved using rule 15 (expr -> expr GREATER expr .)
+  ! reduce/reduce conflict for / resolved using rule 15 (expr -> expr GREATER expr .)
+  ! reduce/reduce conflict for * resolved using rule 15 (expr -> expr GREATER expr .)
+  ! reduce/reduce conflict for - resolved using rule 15 (expr -> expr GREATER expr .)
+  ! reduce/reduce conflict for + resolved using rule 15 (expr -> expr GREATER expr .)
+  ! reduce/reduce conflict for ) resolved using rule 15 (expr -> expr GREATER expr .)
+  ! reduce/reduce conflict for ; resolved using rule 15 (expr -> expr GREATER expr .)
+  ! shift/reduce conflict for NOTEQUALS resolved as shift
+  ! shift/reduce conflict for EQUALS resolved as shift
+  ! shift/reduce conflict for GREATER resolved as shift
+  ! shift/reduce conflict for LESS resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for + resolved as shift
+    )               reduce using rule 15 (expr -> expr GREATER expr .)
+    ;               reduce using rule 15 (expr -> expr GREATER expr .)
+    NOTEQUALS       shift and go to state 23
+    EQUALS          shift and go to state 24
+    GREATER         shift and go to state 25
+    LESS            shift and go to state 26
+    /               shift and go to state 27
+    *               shift and go to state 28
+    -               shift and go to state 29
+    +               shift and go to state 30
+
+
+state 37
+
+    (16) expr -> expr LESS expr .
+    (11) expr -> expr .
+    (13) expr -> expr . NOTEQUALS expr
+    (14) expr -> expr . EQUALS expr
+    (15) expr -> expr . GREATER expr
+    (16) expr -> expr . LESS expr
+    (17) expr -> expr . / expr
+    (18) expr -> expr . * expr
+    (19) expr -> expr . - expr
+    (20) expr -> expr . + expr
+  ! reduce/reduce conflict for NOTEQUALS resolved using rule 16 (expr -> expr LESS expr .)
+  ! reduce/reduce conflict for EQUALS resolved using rule 16 (expr -> expr LESS expr .)
+  ! reduce/reduce conflict for GREATER resolved using rule 16 (expr -> expr LESS expr .)
+  ! reduce/reduce conflict for LESS resolved using rule 16 (expr -> expr LESS expr .)
+  ! reduce/reduce conflict for / resolved using rule 16 (expr -> expr LESS expr .)
+  ! reduce/reduce conflict for * resolved using rule 16 (expr -> expr LESS expr .)
+  ! reduce/reduce conflict for - resolved using rule 16 (expr -> expr LESS expr .)
+  ! reduce/reduce conflict for + resolved using rule 16 (expr -> expr LESS expr .)
+  ! reduce/reduce conflict for ) resolved using rule 16 (expr -> expr LESS expr .)
+  ! reduce/reduce conflict for ; resolved using rule 16 (expr -> expr LESS expr .)
+  ! shift/reduce conflict for NOTEQUALS resolved as shift
+  ! shift/reduce conflict for EQUALS resolved as shift
+  ! shift/reduce conflict for GREATER resolved as shift
+  ! shift/reduce conflict for LESS resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for + resolved as shift
+    )               reduce using rule 16 (expr -> expr LESS expr .)
+    ;               reduce using rule 16 (expr -> expr LESS expr .)
+    NOTEQUALS       shift and go to state 23
+    EQUALS          shift and go to state 24
+    GREATER         shift and go to state 25
+    LESS            shift and go to state 26
+    /               shift and go to state 27
+    *               shift and go to state 28
+    -               shift and go to state 29
+    +               shift and go to state 30
+
+
+state 38
+
+    (17) expr -> expr / expr .
+    (11) expr -> expr .
+    (13) expr -> expr . NOTEQUALS expr
+    (14) expr -> expr . EQUALS expr
+    (15) expr -> expr . GREATER expr
+    (16) expr -> expr . LESS expr
+    (17) expr -> expr . / expr
+    (18) expr -> expr . * expr
+    (19) expr -> expr . - expr
+    (20) expr -> expr . + expr
+  ! reduce/reduce conflict for NOTEQUALS resolved using rule 17 (expr -> expr / expr .)
+  ! reduce/reduce conflict for EQUALS resolved using rule 17 (expr -> expr / expr .)
+  ! reduce/reduce conflict for GREATER resolved using rule 17 (expr -> expr / expr .)
+  ! reduce/reduce conflict for LESS resolved using rule 17 (expr -> expr / expr .)
+  ! reduce/reduce conflict for / resolved using rule 17 (expr -> expr / expr .)
+  ! reduce/reduce conflict for * resolved using rule 17 (expr -> expr / expr .)
+  ! reduce/reduce conflict for - resolved using rule 17 (expr -> expr / expr .)
+  ! reduce/reduce conflict for + resolved using rule 17 (expr -> expr / expr .)
+  ! reduce/reduce conflict for ) resolved using rule 17 (expr -> expr / expr .)
+  ! reduce/reduce conflict for ; resolved using rule 17 (expr -> expr / expr .)
+    )               reduce using rule 17 (expr -> expr / expr .)
+    NOTEQUALS       reduce using rule 17 (expr -> expr / expr .)
+    EQUALS          reduce using rule 17 (expr -> expr / expr .)
+    GREATER         reduce using rule 17 (expr -> expr / expr .)
+    LESS            reduce using rule 17 (expr -> expr / expr .)
+    /               reduce using rule 17 (expr -> expr / expr .)
+    *               reduce using rule 17 (expr -> expr / expr .)
+    -               reduce using rule 17 (expr -> expr / expr .)
+    +               reduce using rule 17 (expr -> expr / expr .)
+    ;               reduce using rule 17 (expr -> expr / expr .)
+
+
+state 39
+
+    (18) expr -> expr * expr .
+    (11) expr -> expr .
+    (13) expr -> expr . NOTEQUALS expr
+    (14) expr -> expr . EQUALS expr
+    (15) expr -> expr . GREATER expr
+    (16) expr -> expr . LESS expr
+    (17) expr -> expr . / expr
+    (18) expr -> expr . * expr
+    (19) expr -> expr . - expr
+    (20) expr -> expr . + expr
+  ! reduce/reduce conflict for NOTEQUALS resolved using rule 18 (expr -> expr * expr .)
+  ! reduce/reduce conflict for EQUALS resolved using rule 18 (expr -> expr * expr .)
+  ! reduce/reduce conflict for GREATER resolved using rule 18 (expr -> expr * expr .)
+  ! reduce/reduce conflict for LESS resolved using rule 18 (expr -> expr * expr .)
+  ! reduce/reduce conflict for / resolved using rule 18 (expr -> expr * expr .)
+  ! reduce/reduce conflict for * resolved using rule 18 (expr -> expr * expr .)
+  ! reduce/reduce conflict for - resolved using rule 18 (expr -> expr * expr .)
+  ! reduce/reduce conflict for + resolved using rule 18 (expr -> expr * expr .)
+  ! reduce/reduce conflict for ) resolved using rule 18 (expr -> expr * expr .)
+  ! reduce/reduce conflict for ; resolved using rule 18 (expr -> expr * expr .)
+    )               reduce using rule 18 (expr -> expr * expr .)
+    NOTEQUALS       reduce using rule 18 (expr -> expr * expr .)
+    EQUALS          reduce using rule 18 (expr -> expr * expr .)
+    GREATER         reduce using rule 18 (expr -> expr * expr .)
+    LESS            reduce using rule 18 (expr -> expr * expr .)
+    /               reduce using rule 18 (expr -> expr * expr .)
+    *               reduce using rule 18 (expr -> expr * expr .)
+    -               reduce using rule 18 (expr -> expr * expr .)
+    +               reduce using rule 18 (expr -> expr * expr .)
+    ;               reduce using rule 18 (expr -> expr * expr .)
+
+
+state 40
+
+    (19) expr -> expr - expr .
+    (11) expr -> expr .
+    (13) expr -> expr . NOTEQUALS expr
+    (14) expr -> expr . EQUALS expr
+    (15) expr -> expr . GREATER expr
+    (16) expr -> expr . LESS expr
+    (17) expr -> expr . / expr
+    (18) expr -> expr . * expr
+    (19) expr -> expr . - expr
+    (20) expr -> expr . + expr
+  ! reduce/reduce conflict for NOTEQUALS resolved using rule 19 (expr -> expr - expr .)
+  ! reduce/reduce conflict for EQUALS resolved using rule 19 (expr -> expr - expr .)
+  ! reduce/reduce conflict for GREATER resolved using rule 19 (expr -> expr - expr .)
+  ! reduce/reduce conflict for LESS resolved using rule 19 (expr -> expr - expr .)
+  ! reduce/reduce conflict for / resolved using rule 19 (expr -> expr - expr .)
+  ! reduce/reduce conflict for * resolved using rule 19 (expr -> expr - expr .)
+  ! reduce/reduce conflict for - resolved using rule 19 (expr -> expr - expr .)
+  ! reduce/reduce conflict for + resolved using rule 19 (expr -> expr - expr .)
+  ! reduce/reduce conflict for ) resolved using rule 19 (expr -> expr - expr .)
+  ! reduce/reduce conflict for ; resolved using rule 19 (expr -> expr - expr .)
+    )               reduce using rule 19 (expr -> expr - expr .)
+    NOTEQUALS       reduce using rule 19 (expr -> expr - expr .)
+    EQUALS          reduce using rule 19 (expr -> expr - expr .)
+    GREATER         reduce using rule 19 (expr -> expr - expr .)
+    LESS            reduce using rule 19 (expr -> expr - expr .)
+    -               reduce using rule 19 (expr -> expr - expr .)
+    +               reduce using rule 19 (expr -> expr - expr .)
+    ;               reduce using rule 19 (expr -> expr - expr .)
+    /               shift and go to state 27
+    *               shift and go to state 28
+
+
+state 41
+
+    (20) expr -> expr + expr .
+    (11) expr -> expr .
+    (13) expr -> expr . NOTEQUALS expr
+    (14) expr -> expr . EQUALS expr
+    (15) expr -> expr . GREATER expr
+    (16) expr -> expr . LESS expr
+    (17) expr -> expr . / expr
+    (18) expr -> expr . * expr
+    (19) expr -> expr . - expr
+    (20) expr -> expr . + expr
+  ! reduce/reduce conflict for NOTEQUALS resolved using rule 20 (expr -> expr + expr .)
+  ! reduce/reduce conflict for EQUALS resolved using rule 20 (expr -> expr + expr .)
+  ! reduce/reduce conflict for GREATER resolved using rule 20 (expr -> expr + expr .)
+  ! reduce/reduce conflict for LESS resolved using rule 20 (expr -> expr + expr .)
+  ! reduce/reduce conflict for / resolved using rule 20 (expr -> expr + expr .)
+  ! reduce/reduce conflict for * resolved using rule 20 (expr -> expr + expr .)
+  ! reduce/reduce conflict for - resolved using rule 20 (expr -> expr + expr .)
+  ! reduce/reduce conflict for + resolved using rule 20 (expr -> expr + expr .)
+  ! reduce/reduce conflict for ) resolved using rule 20 (expr -> expr + expr .)
+  ! reduce/reduce conflict for ; resolved using rule 20 (expr -> expr + expr .)
+    )               reduce using rule 20 (expr -> expr + expr .)
+    NOTEQUALS       reduce using rule 20 (expr -> expr + expr .)
+    EQUALS          reduce using rule 20 (expr -> expr + expr .)
+    GREATER         reduce using rule 20 (expr -> expr + expr .)
+    LESS            reduce using rule 20 (expr -> expr + expr .)
+    -               reduce using rule 20 (expr -> expr + expr .)
+    +               reduce using rule 20 (expr -> expr + expr .)
+    ;               reduce using rule 20 (expr -> expr + expr .)
+    /               shift and go to state 27
+    *               shift and go to state 28
+
+
+state 42
+
+    (5) statement -> IF ( expr ) { . statements }
+    (6) statement -> IF ( expr ) { . statements } ELSE { statements }
+    (2) statements -> . statement ;
+    (3) statements -> . statement ; statements
+    (4) statement -> . WHILE ( expr ) { statements }
+    (5) statement -> . IF ( expr ) { statements }
+    (6) statement -> . IF ( expr ) { statements } ELSE { statements }
+    (7) statement -> . NAME = expr
+    (8) statement -> . PRINT ( expr )
+    WHILE           shift and go to state 4
+    IF              shift and go to state 5
+    NAME            shift and go to state 6
+    PRINT           shift and go to state 7
+
+    statements                     shift and go to state 44
+    statement                      shift and go to state 3
+
+state 43
+
+    (4) statement -> WHILE ( expr ) { statements . }
+    }               shift and go to state 45
+
+
+state 44
+
+    (5) statement -> IF ( expr ) { statements . }
+    (6) statement -> IF ( expr ) { statements . } ELSE { statements }
+    }               shift and go to state 46
+
+
+state 45
+
+    (4) statement -> WHILE ( expr ) { statements } .
+    ;               reduce using rule 4 (statement -> WHILE ( expr ) { statements } .)
+
+
+state 46
+
+    (5) statement -> IF ( expr ) { statements } .
+    (6) statement -> IF ( expr ) { statements } . ELSE { statements }
+    ;               reduce using rule 5 (statement -> IF ( expr ) { statements } .)
+    ELSE            shift and go to state 47
+
+
+state 47
+
+    (6) statement -> IF ( expr ) { statements } ELSE . { statements }
+    {               shift and go to state 48
+
+
+state 48
+
+    (6) statement -> IF ( expr ) { statements } ELSE { . statements }
+    (2) statements -> . statement ;
+    (3) statements -> . statement ; statements
+    (4) statement -> . WHILE ( expr ) { statements }
+    (5) statement -> . IF ( expr ) { statements }
+    (6) statement -> . IF ( expr ) { statements } ELSE { statements }
+    (7) statement -> . NAME = expr
+    (8) statement -> . PRINT ( expr )
+    WHILE           shift and go to state 4
+    IF              shift and go to state 5
+    NAME            shift and go to state 6
+    PRINT           shift and go to state 7
+
+    statements                     shift and go to state 49
+    statement                      shift and go to state 3
+
+state 49
+
+    (6) statement -> IF ( expr ) { statements } ELSE { statements . }
+    }               shift and go to state 50
+
+
+state 50
+
+    (6) statement -> IF ( expr ) { statements } ELSE { statements } .
+    ;               reduce using rule 6 (statement -> IF ( expr ) { statements } ELSE { statements } .)
+
+
+Conflicts:
+
+shift/reduce conflict for ) in state 14 resolved as shift
+shift/reduce conflict for NOTEQUALS in state 14 resolved as shift
+shift/reduce conflict for EQUALS in state 14 resolved as shift
+shift/reduce conflict for GREATER in state 14 resolved as shift
+shift/reduce conflict for LESS in state 14 resolved as shift
+shift/reduce conflict for / in state 14 resolved as shift
+shift/reduce conflict for * in state 14 resolved as shift
+shift/reduce conflict for - in state 14 resolved as shift
+shift/reduce conflict for + in state 14 resolved as shift
+shift/reduce conflict for ) in state 19 resolved as shift
+shift/reduce conflict for NOTEQUALS in state 19 resolved as shift
+shift/reduce conflict for EQUALS in state 19 resolved as shift
+shift/reduce conflict for GREATER in state 19 resolved as shift
+shift/reduce conflict for LESS in state 19 resolved as shift
+shift/reduce conflict for / in state 19 resolved as shift
+shift/reduce conflict for * in state 19 resolved as shift
+shift/reduce conflict for - in state 19 resolved as shift
+shift/reduce conflict for + in state 19 resolved as shift
+shift/reduce conflict for NOTEQUALS in state 20 resolved as shift
+shift/reduce conflict for EQUALS in state 20 resolved as shift
+shift/reduce conflict for GREATER in state 20 resolved as shift
+shift/reduce conflict for LESS in state 20 resolved as shift
+shift/reduce conflict for / in state 20 resolved as shift
+shift/reduce conflict for * in state 20 resolved as shift
+shift/reduce conflict for - in state 20 resolved as shift
+shift/reduce conflict for + in state 20 resolved as shift
+shift/reduce conflict for ) in state 21 resolved as shift
+shift/reduce conflict for NOTEQUALS in state 21 resolved as shift
+shift/reduce conflict for EQUALS in state 21 resolved as shift
+shift/reduce conflict for GREATER in state 21 resolved as shift
+shift/reduce conflict for LESS in state 21 resolved as shift
+shift/reduce conflict for / in state 21 resolved as shift
+shift/reduce conflict for * in state 21 resolved as shift
+shift/reduce conflict for - in state 21 resolved as shift
+shift/reduce conflict for + in state 21 resolved as shift
+shift/reduce conflict for NOTEQUALS in state 36 resolved as shift
+shift/reduce conflict for EQUALS in state 36 resolved as shift
+shift/reduce conflict for GREATER in state 36 resolved as shift
+shift/reduce conflict for LESS in state 36 resolved as shift
+shift/reduce conflict for / in state 36 resolved as shift
+shift/reduce conflict for * in state 36 resolved as shift
+shift/reduce conflict for - in state 36 resolved as shift
+shift/reduce conflict for + in state 36 resolved as shift
+shift/reduce conflict for NOTEQUALS in state 37 resolved as shift
+shift/reduce conflict for EQUALS in state 37 resolved as shift
+shift/reduce conflict for GREATER in state 37 resolved as shift
+shift/reduce conflict for LESS in state 37 resolved as shift
+shift/reduce conflict for / in state 37 resolved as shift
+shift/reduce conflict for * in state 37 resolved as shift
+shift/reduce conflict for - in state 37 resolved as shift
+shift/reduce conflict for + in state 37 resolved as shift
+reduce/reduce conflict in state 20 resolved using rule statement -> NAME = expr
+rejected rule (expr -> expr) in state 20
+reduce/reduce conflict in state 34 resolved using rule expr -> expr NOTEQUALS expr  [precedence=left, level=1]
+rejected rule (expr -> expr) in state 34
+reduce/reduce conflict in state 35 resolved using rule expr -> expr EQUALS expr  [precedence=left, level=1]
+rejected rule (expr -> expr) in state 35
+reduce/reduce conflict in state 36 resolved using rule expr -> expr GREATER expr
+rejected rule (expr -> expr) in state 36
+reduce/reduce conflict in state 37 resolved using rule expr -> expr LESS expr
+rejected rule (expr -> expr) in state 37
+reduce/reduce conflict in state 38 resolved using rule expr -> expr / expr  [precedence=left, level=3]
+rejected rule (expr -> expr) in state 38
+reduce/reduce conflict in state 39 resolved using rule expr -> expr * expr  [precedence=left, level=3]
+rejected rule (expr -> expr) in state 39
+reduce/reduce conflict in state 40 resolved using rule expr -> expr - expr  [precedence=left, level=2]
+rejected rule (expr -> expr) in state 40
+reduce/reduce conflict in state 41 resolved using rule expr -> expr + expr  [precedence=left, level=2]
+rejected rule (expr -> expr) in state 41
+Rule (expr -> expr) is never reduced

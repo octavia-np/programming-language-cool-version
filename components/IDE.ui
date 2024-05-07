@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1000</width>
+    <height>1200</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Complier</string>
+  </property>
+  
+  <property name="styleSheet">
+   <string>
+   QMainWindow {
+       background-color: #1e1e1e; /* Dark gray background */
+   }
+   QMainWindow::title {
+    background-color: #333; /* Darker gray background for the title bar */
+    color: white; /* Text color for the title bar */
+    padding: 10px; /* Padding around the title text */
+    }
+   </string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+  <property name="styleSheet">
+    <string>
+    QWidget#centralwidget {
+        background-color: #1e1e1e; /* Dark gray background */
+    }
+    QLabel#input_label, QLabel#output_label, QLabel#prefix_label, QLabel#postfix_label, QPushButton, QTextEdit {
+        background-color: #2a2a2a; /* Darker gray background for widgets */
+        color: white; /* Text color */
+        border: 1px solid #404040; /* Border color */
+        border-radius: 4px; /* Rounded corners */
+        padding: 4px; /* Padding around the content */
+    }
+    QLabel#input_label, QLabel#output_label, QLabel#prefix_label, QLabel#postfix_label{
+        font-size: 12pt; /* Increase font size */
+    }
+    QLCDNumber, QPushButton, QLabel#prefix_lcd, QLabel#postfix_lcd, QLabel#error_display {
+        color: white; /* Text color */
+    }
+    QPushButton:hover {
+        background-color: #3a3a3a; /* Darker background on hover */
+    }
+    QPushButton:pressed {
+        background-color: #1a1a1a; /* Darker background when pressed */
+    }
+    QLineEdit {
+        border: 1px solid #404040; /* Border color */
+    }
+    </string>
+   </property>
+   <widget class="QTextEdit" name="input_text">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>25</y>
+      <width>950</width>
+      <height>380</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="output_log">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>450</y>
+      <width>950</width>
+      <height>380</height>
+     </rect>
+    </property>
+    <property name="readOnly">
+        <bool>true</bool>  <!-- Set readOnly property to true -->
+    </property>
+   </widget>
+   <widget class="QPushButton" name="button_run">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>420</y>
+      <width>80</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Run</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>408</width>
+     <height>19</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
