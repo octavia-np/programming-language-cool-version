@@ -3,8 +3,6 @@
 This project, part of the Programming Languages and Compilers course, introduces a custom programming language designed to facilitate understanding of variable management, control flow, arithmetic operations, and basic boolean expressions. It includes an interpreter environment to run and test code.
 
 ## Table of Contents
-- [Team Information](#team-information)
-- [Contact Person](#contact-person)
 - [Features](#features)
 - [Installation and Setup](#installation-and-setup)
 - [Language Syntax Guide](#language-syntax-guide)
@@ -12,20 +10,6 @@ This project, part of the Programming Languages and Compilers course, introduces
 - [Parser Grammar Report](#parser-grammar-report)
 - [Lexer Report](#lexer-report)
 - [Example Program](#example-program)
-
-## Team Information
-
-| Student ID | Full Name        | Contribution                               |
-|------------|------------------|-------------------------------------------|
-| st124145   | Minn Banya       | Collaborative design, coding, and testing |
-| st124359   | Phone Myint Zaw  | Collaborative design, coding, and testing |
-| st124390   | Puthi Soptey     | Collaborative design, coding, and testing |
-
-
-### Contact Person
-- **Name**: Minn Banya
-- **Email**: st124145@ait.asia
-- **Phone Number**: 0625789069
 
 ## Features
 
